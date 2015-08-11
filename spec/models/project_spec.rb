@@ -15,6 +15,12 @@ RSpec.describe Experience, type: :model do
     it 'should belong to a user' do
       @experience.should belong_to(:user)
     end
+
+    it { should validate_presence_of :company_name }
+    it { should validate_presence_of :company_city }
+    it { should validate_presence_of :company_state }
+    it { should validate_presence_of :start_date }
+    it { should validate_presence_of :end_date }
   end
 
   context 'user creates an invalid experience' do
