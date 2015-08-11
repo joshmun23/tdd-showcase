@@ -11,6 +11,7 @@ feature %(
   end
 
   scenario 'user creates a valid project' do
+
   end
 
   scenario 'user creates an invalid project' do
