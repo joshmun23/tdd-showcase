@@ -11,4 +11,19 @@ class Experience < ActiveRecord::Base
     presence: true
   validates :end_date,
     presence: true
+  validates :title,
+    presence: true
+
+  def location
+    "#{company_city}, #{company_state}"
+  end
+
+  def formatted_date
+    dates = {
+      start_date: start_date,
+      end_date: end_date
+    }
+
+    dates
+  end
 end

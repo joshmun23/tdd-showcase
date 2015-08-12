@@ -18,6 +18,10 @@ FactoryGirl.define do
     association :user, factory: :user
   end
 
+  factory :invalid_experience, class: Experience do
+
+  end
+
   factory :admin, class: User do
   end
 end
