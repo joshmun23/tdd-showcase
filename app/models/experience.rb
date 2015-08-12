@@ -9,8 +9,7 @@ class Experience < ActiveRecord::Base
     presence: true
   validates :start_date,
     presence: true
-  validates :end_date,
-    presence: true
+  #do not validate end date because a user may currently be working there
   validates :title,
     presence: true
 

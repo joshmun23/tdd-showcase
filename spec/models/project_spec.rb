@@ -16,7 +16,6 @@ RSpec.describe Experience, type: :model do
     it { should validate_presence_of :company_city }
     it { should validate_presence_of :company_state }
     it { should validate_presence_of :start_date }
-    it { should validate_presence_of :end_date }
     it { should validate_presence_of :title }
   end
 end
@@ -36,10 +35,15 @@ end
 describe Experience, '#formatted_date' do
   before(:each) do
     @experience = FactoryGirl.create(:experience)
+    @current_experience = FactoryGirl.create(:experience, end_date: nil)
   end
+
   context 'returns a hash with containing variables for flexibility' do
     it 'returns an object of the Hash class' do
       expect(@experience.formatted_date.class).to eq Hash
+    end
+    it 'should not account for nil values for start_date if current experience' do
+      expect(@current_experience.formatted_date[:end_date]).to eq nil
     end
   end
 end
