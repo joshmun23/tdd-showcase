@@ -32,18 +32,37 @@ describe Experience, '#location' do
   end
 end
 
-describe Experience, '#formatted_date' do
+describe Experience, '#flexible_date' do
   before(:each) do
     @experience = FactoryGirl.create(:experience)
-    @current_experience = FactoryGirl.create(:experience, end_date: nil)
+    @current_experience = FactoryGirl.create(:experience, end_date: nil, current: true)
   end
 
   context 'returns a hash with containing variables for flexibility' do
     it 'returns an object of the Hash class' do
-      expect(@experience.formatted_date.class).to eq Hash
+      expect(@experience.flexible_date.class).to eq Hash
     end
-    it 'should not account for nil values for start_date if current experience' do
-      expect(@current_experience.formatted_date[:end_date]).to eq nil
+    it 'does not account return end_date values if current experience' do
+      expect(@current_experience.current).to eq true
+      expect(@current_experience.flexible_date[:end_date].count).to eq 0
+    end
+  end
+
+  context 'provides the user with start date variables' do
+    before(:each) do
+      @flexible_date = @experience.flexible_date
+    end
+
+    it 'returns start day' do
+      expect(@flexible_date[:start_date][:day]).to eq @experience.start_date.day
+    end
+
+    it 'returns start month' do
+      expect(@flexible_date[:start_date][:month]).to eq @experience.start_date.month
+    end
+
+    it 'returns start year' do
+      expect(@flexible_date[:start_date][:year]).to eq @experience.start_date.year
     end
   end
 end

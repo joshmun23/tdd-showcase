@@ -17,10 +17,13 @@ class Experience < ActiveRecord::Base
     "#{company_city}, #{company_state}"
   end
 
-  def formatted_date
-    dates = {
-      start_date: start_date,
-      end_date: end_date
+  def flexible_date
+    dates = Hash.new({})
+
+    dates[:start_date] = {
+      day: self.start_date.day,
+      month: self.start_date.month,
+      year: self.start_date.year
     }
 
     dates
