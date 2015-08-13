@@ -8,19 +8,31 @@ feature %(
 
   before(:each) do
     @user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_button 'Log in'
   end
 
   scenario 'user creates a valid experience' do
-    visit new_user_experience_path(@user) # "/users/#{@user.id}/projects"
+    visit new_user_experience_path(@user)
 
-    # expect('section#top-header h3').to_have header("Add Experience")
     expect(page).to have_css('section.new-form')
     expect(page).to have_css('section.new-form header h3')
     expect(page).to have_content('Add New Experience')
+    expect(page).to have_css('.new-form form')
+
+    within :css, 'section.new-form form' do
+      fill_in 'Company name', with: 'LeaseQ'
+      fill_in 'Company city', with: 'Woburn'
+      select 'MA', from: 'Company state'
+    end
   end
 
-  scenario 'user creates an invalid project' do
-  end
+  scenario 'user creates an invalid project'
 end
 
 

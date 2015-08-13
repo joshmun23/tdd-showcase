@@ -1,5 +1,20 @@
 <section class="new-form">
   <header>
     <h3>Add New Experience</h3>
+
+    <%= form_for([@user, @experience]) do |f| %>
+      <%= f.label :company_name %>
+      <%= f.text_field :company_name %>
+
+      <%= f.label :company_city %>
+      <%= f.text_field :company_city %>
+
+      <%= f.label :company_state %>
+      <%= f.select :company_state do %>
+        <% Experience.us_states.each do |state| %>
+          <%= content_tag :option, state.last %>
+        <% end %>
+      <% end %>
+    <% end %>
   </header>
 </section>
