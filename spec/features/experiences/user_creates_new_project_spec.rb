@@ -29,6 +29,17 @@ feature %(
       fill_in 'Company name', with: 'LeaseQ'
       fill_in 'Company city', with: 'Woburn'
       select 'MA', from: 'Company state'
+      page.select '29', :from => 'experience_start_date_3i'
+      page.select 'June', :from => 'experience_start_date_2i'
+      page.select '2015', :from => 'experience_start_date_1i'
+      save_and_open_page
+
+      # Page should not have End Date if the default current value is set
+      # expect(page).to_not have_content('End date')
+      # Page should have End Date if user checks the current box
+      # check 'Current'
+      # expect(page).to have_content('End date')
+
     end
   end
 
