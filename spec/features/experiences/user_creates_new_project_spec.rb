@@ -17,7 +17,7 @@ feature %(
     click_button 'Log in'
   end
 
-  scenario 'user creates a valid experience' do
+  scenario 'user creates a valid current experience' do
     visit new_user_experience_path(@user)
 
     expect(page).to have_css('section.new-form')
@@ -26,6 +26,7 @@ feature %(
     expect(page).to have_css('.new-form form')
 
     within :css, 'section.new-form form' do
+      fill_in 'Title', with: 'Full-Stack Web Developer'
       fill_in 'Company name', with: 'LeaseQ'
       fill_in 'Company city', with: 'Woburn'
       select 'MA', from: 'Company state'
@@ -39,11 +40,21 @@ feature %(
       # check 'Current'
       # expect(page).to have_content('End date')
 
-      page.select '1', :from => 'experience_end_date_3i'
-      page.select 'August', :from => 'experience_end_date_2i'
-      page.select '2015', :from => 'experience_end_date_1i'
+      # page.select '1', :from => 'experience_end_date_3i'
+      # page.select 'August', :from => 'experience_end_date_2i'
+      # page.select '2015', :from => 'experience_end_date_1i'
 
-      fill_in 'Title', with: 'Full-Stack Web Developer'
+      click_button 'Submit'
+
+    end
+
+    expect(page).to have_content('Experience successfully added')
+
+    within :css, 'section#experiences-list' do
+      expect(page).to have_content('Full-Stack Web Developer')
+      expect(page).to have_content('LeaseQ')
+      expect(page).to have_content('Woburn')
+      expect(page).to have_content('MA')
     end
   end
 
