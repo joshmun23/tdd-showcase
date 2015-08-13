@@ -21,14 +21,12 @@ class Experience < ActiveRecord::Base
     dates = Hash.new({})
 
     dates[:start_date] = {
-      day: self.start_date.day,
       month: self.start_date.month,
       year: self.start_date.year
     }
 
     if self.end_date
       dates[:end_date] = {
-        day: self.end_date.day,
         month: self.end_date.month,
         year: self.end_date.year
       }
