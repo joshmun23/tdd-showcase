@@ -1,0 +1,18 @@
+<section id="experiences-list">
+  <header><h3 class="text-center">Experience</h3></header>
+
+  <div class="flex-row full-width">
+      <h5 class="experience-title text-center">Title</h5>
+
+      <span class="experience-name text-center">Company Name</span>
+      <span class="experience-location text-center">Company Position</span>
+    </div>
+  <% @experiences.each do |experience| %>
+    <div class="flex-row full-width">
+      <h5 class="experience-title text-center"><%= experience.title %></h5>
+
+      <span class="experience-name text-center"><%= experience.company_name %></span>
+      <span class="experience-location text-center"><%= "#{experience.company_city}, #{experience.company_state}" %></span>
+    </div>
+  <% end %>
+</section>
