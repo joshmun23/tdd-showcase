@@ -32,7 +32,6 @@ feature %(
       page.select '29', :from => 'experience_start_date_3i'
       page.select 'June', :from => 'experience_start_date_2i'
       page.select '2015', :from => 'experience_start_date_1i'
-      save_and_open_page
 
       # Page should not have End Date if the default current value is set
       # expect(page).to_not have_content('End date')
@@ -40,6 +39,9 @@ feature %(
       # check 'Current'
       # expect(page).to have_content('End date')
 
+      page.select '1', :from => 'experience_end_date_3i'
+      page.select 'August', :from => 'experience_end_date_2i'
+      page.select '2015', :from => 'experience_end_date_1i'
     end
   end
 
