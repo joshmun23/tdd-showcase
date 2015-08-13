@@ -17,7 +17,18 @@
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <li><a href="#" data-dropdown="hover1" data-options="is_hover:true">Experience</a></li>
+          <ul id="hover1" class="f-dropdown full-width" data-dropdown-content>
+            <li class="full-width text-center"><%= link_to 'Add an Experience', new_user_experience_path(current_user) %></li>
+            <li class="full-width text-center"><%= link_to 'View all Experiences',user_experiences_path(current_user) %></li>
+          </ul>
+
+          <li><a href="#" data-dropdown="hover2" data-options="is_hover:true"><%= current_user.email %></a></li>
+          <ul id="hover2" class="f-dropdown full-width" data-dropdown-content>
+            <li class="full-width text-center"><a href="#">This is a link</a></li>
+            <li class="full-width text-center"><a href="#">This is another</a></li>
+            <li class="full-width text-center"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          </ul>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <li><%= link_to 'Sign In', new_user_session_path %></li>
