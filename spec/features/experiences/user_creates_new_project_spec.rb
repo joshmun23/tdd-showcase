@@ -30,7 +30,6 @@ feature %(
       fill_in 'Company name', with: 'LeaseQ'
       fill_in 'Company city', with: 'Woburn'
       select 'MA', from: 'Company state'
-      page.select '29', :from => 'experience_start_date_3i'
       page.select 'June', :from => 'experience_start_date_2i'
       page.select '2015', :from => 'experience_start_date_1i'
 
@@ -58,7 +57,11 @@ feature %(
     end
   end
 
-  scenario 'user creates an invalid project'
+  scenario 'user creates an invalid project' do
+    visit new_user_experience_path(@user)
+    #start and end date years should not be past the current year
+
+  end
 end
 
 

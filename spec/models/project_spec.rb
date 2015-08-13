@@ -54,10 +54,6 @@ describe Experience, '#flexible_date' do
       @flexible_date = @experience.flexible_date
     end
 
-    it 'returns start day' do
-      expect(@flexible_date[:start_date][:day]).to eq @experience.start_date.day
-    end
-
     it 'returns start month' do
       expect(@flexible_date[:start_date][:month]).to eq @experience.start_date.month
     end
@@ -68,10 +64,6 @@ describe Experience, '#flexible_date' do
   end
 
   context 'provides the user with end date variables' do
-    it 'returns end day' do
-      expect(@flexible_date[:end_date][:day]).to eq @experience.end_date.day
-    end
-
     it 'returns end month' do
       expect(@flexible_date[:end_date][:month]).to eq @experience.end_date.month
     end
