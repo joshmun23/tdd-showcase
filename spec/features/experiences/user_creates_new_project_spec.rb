@@ -42,6 +42,8 @@ feature %(
       page.select '1', :from => 'experience_end_date_3i'
       page.select 'August', :from => 'experience_end_date_2i'
       page.select '2015', :from => 'experience_end_date_1i'
+
+      fill_in 'Title', with: 'Full-Stack Web Developer'
     end
   end
 
