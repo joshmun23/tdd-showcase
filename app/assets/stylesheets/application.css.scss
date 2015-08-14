@@ -16,7 +16,32 @@
 
  */
 
+$orange: #F39C12;
+$black: #000000;
+$cloud: #ecf0f1;
+
 body {
   margin: 0;
   padding: 0;
+  background-color: #fff;
+  color: #3D72A4;
+}
+
+body {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bebas Neue", Arial;
+    font-size: 25px;
+    color: #000;
+  }
+
+  label {
+  }
+
+}
+
+
+nav.top-bar {
+  -moz-box-shadow: 0 .2px $black;
+  -webkit-box-shadow: 0 .2px $black;
+  box-shadow: 0 .2px $black;
 }
