@@ -14,7 +14,7 @@ class ExperiencesController < ApplicationController
       flash[:notice] = "Experience successfully added"
       redirect_to user_experiences_path(@user)
     else
-      flash[:errors] = @experience.errors.join(', ')
+      flash[:errors] = @experience.errors.full_messages.join(', ')
       render :new
     end
   end
