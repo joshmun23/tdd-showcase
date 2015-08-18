@@ -17,7 +17,6 @@ class Experience < ActiveRecord::Base
 
   def no_end_date_if_current
     if current
-      binding.pry
       end_date == nil
     end
   end
