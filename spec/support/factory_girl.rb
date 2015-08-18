@@ -18,6 +18,16 @@ FactoryGirl.define do
     association :user, factory: :user
   end
 
+  factory :current_experience do
+    sequence(:company_name) {|n| "Company #{n}"}
+    sequence(:company_city) {|n| "City #{n}"}
+    sequence(:company_state) {|n| "State #{n}"}
+    sequence(:start_date) { |n| Time.now - (n+rand(2..60)).months }
+    current true
+    title "Full-Stack Web Developer"
+    association :user, factory: :user
+  end
+
   factory :invalid_experience, class: Experience do
 
   end
