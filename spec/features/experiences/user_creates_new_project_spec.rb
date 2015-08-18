@@ -61,8 +61,9 @@ feature %(
     within :css, 'section.new-form form' do
       click_button 'Submit'
     end
-    expect(page).to have_content("Company name can't be blank, Company city can't be blank, Title can't be blank
-")
+    expect(page).to have_content(
+      "Company name can't be blank, Company city can't be blank, Title can't be blank"
+    )
   end
 end
 
