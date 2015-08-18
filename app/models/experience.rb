@@ -13,26 +13,47 @@ class Experience < ActiveRecord::Base
   validates :title,
     presence: true
 
+  validate :no_end_date_if_current
+
+  def no_end_date_if_current
+    if current
+      end_date == nil
+    end
+  end
+
   def location
     "#{company_city}, #{company_state}"
   end
 
+  ######## Allow users to format the date however they wish ########
   def flexible_date
     dates = Hash.new({})
-
     dates[:start_date] = {
-      month: self.start_date.month,
+      month: self.start_date.strftime("%B"),
       year: self.start_date.year
     }
 
     if self.end_date
       dates[:end_date] = {
-        month: self.end_date.month,
+        month: self.end_date.strftime("%B"),
         year: self.end_date.year
       }
     end
 
     dates
+  end
+
+  def formatted_date
+    formatted_dates = {}
+    flexible_dates = flexible_date
+    date_periods = flexible_dates.keys.map { |period| period }
+
+    date_periods.each do |period|
+      date_period = flexible_dates[period]
+      formatted_dates[period] = "#{date_period[:month]} #{date_period[:year]}"
+    end
+
+    formatted_dates
   end
 
   def self.us_states

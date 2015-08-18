@@ -50,10 +50,16 @@ feature %(
     expect(page).to have_content('Experience successfully added')
 
     within :css, 'section#experiences-list' do
-      expect(page).to have_content('Full-Stack Web Developer')
-      expect(page).to have_content('LeaseQ')
-      expect(page).to have_content('Woburn')
-      expect(page).to have_content('MA')
+      experience = @user.experiences.last
+      start_date = experience.flexible_date[:start_date]
+      end_date   = experience.flexible_date[:end_date]
+
+      expect(page).to have_content experience.title
+      expect(page).to have_content experience.location
+      #check for current
+      expect(page).to have_content 'Current'
+      expect(page).to have_content "#{start_date[:month]} #{start_date[:year]}"
+      expect(page).to_not have_content "#{end_date[:month]} #{end_date[:year]}"
     end
   end
 

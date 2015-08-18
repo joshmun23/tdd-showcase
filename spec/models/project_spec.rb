@@ -41,7 +41,7 @@ describe Experience, '#flexible_date' do
 
   context 'returns a hash with containing variables for flexibility' do
     it 'returns an object of the Hash class' do
-      expect(@experience.flexible_date.class).to eq Hash
+      expect(@flexible_date.class).to eq Hash
     end
     it 'does not return end_date values if current experience' do
       expect(@current_experience.current).to eq true
@@ -50,12 +50,8 @@ describe Experience, '#flexible_date' do
   end
 
   context 'provides the user with start date variables' do
-    before(:each) do
-      @flexible_date = @experience.flexible_date
-    end
-
     it 'returns start month' do
-      expect(@flexible_date[:start_date][:month]).to eq @experience.start_date.month
+      expect(@flexible_date[:start_date][:month]).to eq @experience.start_date.strftime("%B")
     end
 
     it 'returns start year' do
@@ -65,11 +61,31 @@ describe Experience, '#flexible_date' do
 
   context 'provides the user with end date variables' do
     it 'returns end month' do
-      expect(@flexible_date[:end_date][:month]).to eq @experience.end_date.month
+      expect(@flexible_date[:end_date][:month]).to eq @experience.end_date.strftime("%B")
     end
 
     it 'returns end year' do
       expect(@flexible_date[:end_date][:year]).to eq @experience.end_date.year
     end
+  end
+end
+
+describe Experience, '#formatted_date' do
+  before(:each) do
+    @experience = FactoryGirl.create(:experience)
+    @current_experience = FactoryGirl.create(:experience, end_date: nil, current: true)
+    @flexible_date = @experience.flexible_date
+  end
+
+  it 'provides users with a default format for start date' do
+    expect(@experience.formatted_date[:start_date]).to eq(
+      "#{@experience.start_date.strftime("%B")} #{@experience.start_date.year}"
+    )
+  end
+
+  it 'provides users with a default format for end date' do
+    expect(@experience.formatted_date[:end_date]).to eq(
+      "#{@experience.end_date.strftime("%B")} #{@experience.end_date.year}"
+    )
   end
 end

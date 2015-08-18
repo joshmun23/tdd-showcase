@@ -1,19 +1,33 @@
 <section id="experiences-list">
-  <header><h3 class="text-center">Experience</h3></header>
+  <header>
+    <h3 class="text-center">Experience</h3>
+  </header>
 
   <div class="flex-row full-width text-center">
-      <h5 class="experience-title">Title</h5>
+    <h5 class="experience-title">Title</h5>
 
-      <span class="experience-name">Company Name</span>
-      <span class="experience-location">Company Position</span>
-    </div>
+    <span class="experience-name">Company Name</span>
+    <span class="experience-location">Company Position</span>
+    <span class="experience-start">Start Date</span>
+    <span class="experience-end">End Date</span>
+  </div>
 
   <% @experiences.each do |experience| %>
     <div class="flex-row full-width text-center">
       <h5 class="experience-title"><%= experience.title %></h5>
 
-      <span class="experience-name"><%= experience.company_name %></span>
-      <span class="experience-location"><%= "#{experience.company_city}, #{experience.company_state}" %></span>
+      <span class="experience-name">
+        <%= experience.company_name %>
+      </span>
+      <span class="experience-location">
+        <%= "#{experience.company_city}, #{experience.company_state}" %>
+      </span>
+      <span class="experience-start">
+        <%= experience.formatted_date[:start_date] %>
+      </span>
+      <span class="experience-end">
+        <%= experience.current ? 'Current' : experience.formatted_date[:end_date] %>
+      </span>
     </div>
   <% end %>
 </section>
