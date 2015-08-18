@@ -33,18 +33,12 @@ feature %(
       page.select 'June', :from => 'experience_start_date_2i'
       page.select '2015', :from => 'experience_start_date_1i'
 
-      # Page should not have End Date if the default current value is set
-      # expect(page).to_not have_content('End date')
-      # Page should have End Date if user checks the current box
-      # check 'Current'
-      # expect(page).to have_content('End date')
-
       # page.select '1', :from => 'experience_end_date_3i'
       # page.select 'August', :from => 'experience_end_date_2i'
       # page.select '2015', :from => 'experience_end_date_1i'
 
+      # need to add javascript testing tools to run script
       click_button 'Submit'
-
     end
 
     expect(page).to have_content('Experience successfully added')
@@ -56,31 +50,15 @@ feature %(
 
       expect(page).to have_content experience.title
       expect(page).to have_content experience.location
-      #check for current
+      #check for current experience
       expect(page).to have_content 'Current'
       expect(page).to have_content "#{start_date[:month]} #{start_date[:year]}"
-      expect(page).to_not have_content "#{end_date[:month]} #{end_date[:year]}"
     end
   end
 
   scenario 'user creates an invalid project (submits a blank form)' do
     visit new_user_experience_path(@user)
-    #start and end date years should not be past the current year
     within :css, 'section.new-form form' do
-      select 'MA', from: 'Company state'
-      page.select 'June', :from => 'experience_start_date_2i'
-      page.select '2015', :from => 'experience_start_date_1i'
-
-      # Page should not have End Date if the default current value is set
-      # expect(page).to_not have_content('End date')
-      # Page should have End Date if user checks the current box
-      # check 'Current'
-      # expect(page).to have_content('End date')
-
-      # page.select '1', :from => 'experience_end_date_3i'
-      # page.select 'August', :from => 'experience_end_date_2i'
-      # page.select '2015', :from => 'experience_end_date_1i'
-
       click_button 'Submit'
     end
     expect(page).to have_content("Company name can't be blank, Company city can't be blank, Title can't be blank
