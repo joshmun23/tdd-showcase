@@ -14,6 +14,7 @@ FactoryGirl.define do
     sequence(:company_state) {|n| "State #{n}"}
     sequence(:start_date) { |n| Time.now - (n+rand(2..60)).months }
     sequence(:end_date) { |n| Time.now - (n+rand(0..2)).months }
+    current false
     title "Full-Stack Web Developer"
     association :user, factory: :user
   end

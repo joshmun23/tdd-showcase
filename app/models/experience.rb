@@ -13,11 +13,14 @@ class Experience < ActiveRecord::Base
   validates :title,
     presence: true
 
-  validate :no_end_date_if_current
+  validate :end_date_with_current
 
-  def no_end_date_if_current
-    if current
-      end_date == nil
+  def end_date_with_current
+    if current && end_date
+      errors.add(
+        :end_date,
+        "There should not be an end date if this is a current experience"
+      )
     end
   end
 
